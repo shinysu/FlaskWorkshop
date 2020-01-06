@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include "header.html" %}
+
+<body>
+    <div class="row">
+        <<div class="col-md-1"></div>
+        <div class="col-md-1">
+            <img src="/static/todologo.jpg" ALT="Flask" WIDTH=100 HEIGHT=100 align="center">
+        </div>
+        <div class="col-md-3">
+            <h1 align="center">Task Allocator</h1>
+        </div>
+    </div>
+    <div class="container">
+        <h4>Welcome to Task Allocator! Helps you allocate tasks to members of your project! </h4>
+        <br>
+        <br>
+        <form action="{{ url_for('modify',task_id=task_id) }}" method="POST">
+            <div class="form-group row align-items-center">
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="new_item" id="new_item" value={{task_name}}>
+                </div>
+
+                <div class="col-sm-2">
+                    {% if task_name %}
+                        <button type="submit" class="btn btn-primary float-right" name="operation" value="edit">Save</button>
+                    {% else %}
+                        <button type="submit" class="btn btn-primary float-right" name="operation" value="add">Add</button>
+                    {% endif %}
+                </div>
+            </div>
+            <br>
+            </form>
+            <h4>Task List</h4>
+            <div class="list-group">
+                <div class="col-sm-3">
+                {% for task in tasks %}
+                    <a href="{{ url_for('edit', task_id=task[0], task_name=task[1]) }}" class="list-group-item">{{ task[1] }}</a>
+                {% endfor %}
+                </div>
+            </div>
+
+    </div>
+</body>
+</html>

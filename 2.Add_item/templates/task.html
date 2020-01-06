@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include "header.html" %}
+
+<body>
+    <div class="row">
+        <<div class="col-md-1"></div>
+        <div class="col-md-1">
+            <img src="/static/todologo.jpg" ALT="Flask" WIDTH=100 HEIGHT=100 align="center">
+        </div>
+        <div class="col-md-3">
+            <h1 align="center">Task Allocator</h1>
+        </div>
+    </div>
+    <div class="container">
+        <h4>Welcome to Task Allocator! Helps you allocate tasks to members of your project! </h4>
+        <br>
+        <br>
+        <form action="{{ url_for('add') }}" method="POST">
+            <div class="form-group row align-items-center">
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="new_item" id="new_item">
+                </div>
+
+                <div class="col-sm-2">
+                    <button type="submit" class="btn btn-primary float-right">Add</button>
+                </div>
+            </div>
+            <br>
+            <h4>Task List</h4>
+            <div class="list-group">
+                <div class="col-sm-3">
+                {% for task in tasks %}
+                    <a href="#" class="list-group-item">{{ task[0] }}</a>
+                {% endfor %}
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
