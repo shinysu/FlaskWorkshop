@@ -5,7 +5,10 @@ def execute_query(sql_query):
     with sqlite3.connect("task.db") as con:
         cur = con.cursor()
         result = cur.execute(sql_query)
-        con.commit()
+        try:
+            con.commit()
+        except Exception as e:
+            print("ERROR OCCURED WHILE DB COMMIT ",e)
     return result
 
 

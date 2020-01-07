@@ -12,7 +12,6 @@ def index():
 
 @app.route('/modify/<task_id>', methods=['POST'])
 def modify(task_id):
-    print(task_id)
     new_task = request.form['new_item']
     if request.form['operation'] == "add":
         add_tasks(new_task)
@@ -25,9 +24,12 @@ def modify(task_id):
 @app.route('/edit/<task_id>/<task_name>')
 def edit(task_id, task_name):
     tasks = get_tasks()
-    print("task_id",task_id)
-    print("task_name",task_name)
     return render_template('task.html', task_id=task_id, task_name=task_name, tasks=tasks)
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 
 if __name__ == '__main__':
